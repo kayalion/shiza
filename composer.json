@@ -1,0 +1,33 @@
+{
+    "name": "kayalion/shiza",
+    "description": "Shiza web development manager",
+    "license": "MIT",
+    "version": "0.1.0",
+    "authors": [
+        {
+            "name": "KayaLion",
+            "email": "kaya@shiza.be"
+        }
+    ],
+    "require": {
+        "ride/cli" : "*",
+        "ride/lib-common" : "*",
+        "ride/lib-database" : "*",
+        "ride/lib-form" : "*",
+        "ride/lib-mime" : "*",
+        "ride/lib-http" : "*",
+        "ride/lib-i18n" : "*",
+        "ride/lib-queue" : "*",
+        "ride/lib-orm" : "*",
+        "ride/lib-system" : "^1.1.0",
+        "ride/lib-system-ssh" : "*",
+        "ride/lib-validation" : "*",
+        "ride/web-base" : "*",
+        "ride/wra-queue" : "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "shiza": ["src/"]
+        }
+    }
+}

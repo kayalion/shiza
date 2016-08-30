@@ -31,13 +31,12 @@
             $(".varnish-vcl").toggle();
         });
 
-        var url = "{url id="api.queue.status.job" parameters=["queue" => "%queue%", "id" => "%id%"]}";
+        var url = "{url id="api.queue-jobs.detail" parameters=["id" => "%id%"]}";
 
         $("[data-queue]").each(function() {
             var $this = $(this);
 
             var jobUrl = url;
-            jobUrl = jobUrl.replace('%25queue%25', $this.data('queue'));
             jobUrl = jobUrl.replace('%25id%25', $this.data('queue-id'));
 
             updateQueueStatus(jobUrl, 3);
