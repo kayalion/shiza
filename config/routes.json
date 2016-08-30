@@ -1,0 +1,372 @@
+{
+    "routes": [
+        {
+            "path": "/hooks/github",
+            "controller": "shiza\\controller\\HookController",
+            "action": "githubAction",
+            "id": "hooks.github"
+        },
+        {
+            "path": "/activity",
+            "controller": "shiza\\controller\\MessageController",
+            "action": "indexAction",
+            "id": "messages"
+        },
+        {
+            "path": "/activity/%id%",
+            "controller": "shiza\\controller\\MessageController",
+            "action": "detailAction",
+            "id": "messages.detail"
+        },
+        {
+            "path": "/ssh-keys",
+            "controller": "shiza\\controller\\SshKeyController",
+            "action": "indexAction",
+            "id": "ssh-keys"
+        },
+        {
+            "path": "/ssh-keys/add",
+            "controller": "shiza\\controller\\SshKeyController",
+            "action": "formAction",
+            "id": "ssh-keys.add"
+        },
+        {
+            "path": "/ssh-keys/%id%",
+            "controller": "shiza\\controller\\SshKeyController",
+            "action": "formAction",
+            "id": "ssh-keys.edit"
+        },
+        {
+            "path": "/ssh-keys/%id%/delete",
+            "controller": "shiza\\controller\\SshKeyController",
+            "action": "deleteAction",
+            "id": "ssh-keys.delete"
+        },
+        {
+            "path": "/key-chains",
+            "controller": "shiza\\controller\\KeyChainController",
+            "action": "indexAction",
+            "id": "key-chains"
+        },
+        {
+            "path": "/key-chains/add",
+            "controller": "shiza\\controller\\KeyChainController",
+            "action": "formAction",
+            "id": "key-chains.add"
+        },
+        {
+            "path": "/key-chains/%id%",
+            "controller": "shiza\\controller\\KeyChainController",
+            "action": "formAction",
+            "id": "key-chains.edit"
+        },
+        {
+            "path": "/key-chains/%id%/delete",
+            "controller": "shiza\\controller\\KeyChainController",
+            "action": "deleteAction",
+            "id": "key-chains.delete"
+        },
+        {
+            "path": "/servers",
+            "controller": "shiza\\controller\\ServerController",
+            "action": "indexAction",
+            "id": "servers"
+        },
+        {
+            "path": "/servers/add",
+            "controller": "shiza\\controller\\ServerController",
+            "action": "formAction",
+            "id": "servers.add"
+        },
+        {
+            "path": "/servers/%id%",
+            "controller": "shiza\\controller\\ServerController",
+            "action": "formAction",
+            "id": "servers.edit"
+        },
+        {
+            "path": "/servers/%id%/test",
+            "controller": "shiza\\controller\\ServerController",
+            "action": "testAction",
+            "id": "servers.test"
+        },
+        {
+            "path": "/servers/%id%/delete",
+            "controller": "shiza\\controller\\ServerController",
+            "action": "deleteAction",
+            "id": "servers.delete"
+        },
+        {
+            "path": "/repositories",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "indexAction",
+            "id": "repositories"
+        },
+        {
+            "path": "/repositories/add",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "formAction",
+            "id": "repositories.add"
+        },
+        {
+            "path": "/repositories/%repository%",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "detailAction",
+            "id": "repositories.detail"
+        },
+        {
+            "path": "/repositories/%repository%/browse",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "browseAction",
+            "id": "repositories.browse",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/download",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "downloadAction",
+            "id": "repositories.download",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/commits",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "commitsAction",
+            "id": "repositories.commits",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/messages",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "messagesAction",
+            "id": "repositories.messages",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/deployment",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "deploymentAction",
+            "id": "repositories.deployment",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/deployment/add",
+            "controller": "shiza\\controller\\RepositoryDeployerController",
+            "action": "addAction",
+            "id": "repositories.deployment.add",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/deployment/edit/%deployer%",
+            "controller": "shiza\\controller\\RepositoryDeployerController",
+            "action": "editAction",
+            "id": "repositories.deployment.edit",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/deployment/delete/%deployer%",
+            "controller": "shiza\\controller\\RepositoryDeployerController",
+            "action": "deleteAction",
+            "id": "repositories.deployment.delete",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/deployment/deploy",
+            "controller": "shiza\\controller\\RepositoryDeployerController",
+            "action": "deployAction",
+            "id": "repositories.deployment.deploy",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/integration",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "integrationAction",
+            "id": "repositories.integration",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/integration/add",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "integrationAddAction",
+            "id": "repositories.integration.add",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/integration/edit/%builder%",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "integrationEditAction",
+            "id": "repositories.integration.edit",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/integration/delete/%builder%",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "integrationDeleteAction",
+            "id": "repositories.integration.delete",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/integration/build",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "integrationBuildAction",
+            "id": "repositories.integration.build",
+            "dynamic": true
+        },
+        {
+            "path": "/repositories/%repository%/edit",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "formAction",
+            "id": "repositories.edit"
+        },
+        {
+            "path": "/repositories/%repository%/delete",
+            "controller": "shiza\\controller\\RepositoryController",
+            "action": "deleteAction",
+            "id": "repositories.delete"
+        },
+        {
+            "path": "/projects",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "indexAction",
+            "id": "projects"
+        },
+        {
+            "path": "/projects/add",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "formAction",
+            "id": "projects.add"
+        },
+        {
+            "path": "/projects/%project%",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "detailAction",
+            "id": "projects.detail"
+        },
+        {
+            "path": "/projects/%project%/edit",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "formAction",
+            "id": "projects.edit"
+        },
+        {
+            "path": "/projects/%project%/delete",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "deleteAction",
+            "id": "projects.delete"
+        },
+        {
+            "path": "/projects/%project%/notes",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "notesAction",
+            "id": "projects.notes"
+        },
+        {
+            "path": "/projects/%project%/cron",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "cronAction",
+            "id": "projects.cron"
+        },
+        {
+            "path": "/projects/%project%/varnish",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "varnishAction",
+            "id": "projects.varnish"
+        },
+        {
+            "path": "/projects/%project%/varnish/restart",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "varnishRestartAction",
+            "id": "projects.varnish.restart"
+        },
+        {
+            "path": "/projects/%project%/varnish/delete",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "varnishDeleteAction",
+            "id": "projects.varnish.delete"
+        },
+        {
+            "path": "/projects/%project%/ssh-keys",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "sshKeysAction",
+            "id": "projects.ssh-keys"
+        },
+        {
+            "path": "/projects/%project%/ssh-keys/%sshKey%/delete",
+            "controller": "shiza\\controller\\ProjectController",
+            "action": "sshKeysDeleteAction",
+            "id": "projects.ssh-keys.delete"
+        },
+        {
+            "path": "/projects/%project%/environments/add",
+            "controller": "shiza\\controller\\ProjectEnvironmentController",
+            "action": "formAction",
+            "id": "environments.add"
+        },
+        {
+            "path": "/projects/%project%/environments/%environment%/edit",
+            "controller": "shiza\\controller\\ProjectEnvironmentController",
+            "action": "formAction",
+            "id": "environments.edit"
+        },
+        {
+            "path": "/projects/%project%/environments/%environment%/php",
+            "controller": "shiza\\controller\\ProjectEnvironmentController",
+            "action": "phpAction",
+            "id": "environments.php"
+        },
+        {
+            "path": "/projects/%project%/environments/%environment%/ssl",
+            "controller": "shiza\\controller\\ProjectEnvironmentController",
+            "action": "sslAction",
+            "id": "environments.ssl"
+        },
+        {
+            "path": "/projects/%project%/environments/%environment%/log",
+            "controller": "shiza\\controller\\ProjectEnvironmentController",
+            "action": "logAction",
+            "id": "environments.log"
+        },
+        {
+            "path": "/projects/%project%/environments/%environment%/backups",
+            "controller": "shiza\\controller\\ProjectEnvironmentController",
+            "action": "backupAction",
+            "id": "environments.backups"
+        },
+        {
+            "path": "/projects/%project%/environments/%environment%/backups/%backup%",
+            "controller": "shiza\\controller\\ProjectEnvironmentController",
+            "action": "backupDownloadAction",
+            "id": "environments.backups.download"
+        },
+        {
+            "path": "/projects/%project%/environments/%environment%/delete",
+            "controller": "shiza\\controller\\ProjectEnvironmentController",
+            "action": "deleteAction",
+            "id": "environments.delete"
+        },
+        {
+            "path": "/projects/%project%/databases/add",
+            "controller": "shiza\\controller\\ProjectDatabaseController",
+            "action": "formAction",
+            "id": "databases.add"
+        },
+        {
+            "path": "/projects/%project%/databases/%database%/backups",
+            "controller": "shiza\\controller\\ProjectDatabaseController",
+            "action": "backupAction",
+            "id": "databases.backups"
+        },
+        {
+            "path": "/projects/%project%/databases/%database%/backups/%backup%",
+            "controller": "shiza\\controller\\ProjectDatabaseController",
+            "action": "backupDownloadAction",
+            "id": "databases.backups.download"
+        },
+        {
+            "path": "/projects/%project%/databases/%database%/delete",
+            "controller": "shiza\\controller\\ProjectDatabaseController",
+            "action": "deleteAction",
+            "id": "databases.delete"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+.breadcrumb {
+    /* background: transparent; */
+}
+
+.console {
+    background-color: #222;
+    color: #f3f3f3;
+    font-family: monospace;
+    padding: 5px;
+}

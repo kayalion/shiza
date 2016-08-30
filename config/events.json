@@ -1,0 +1,8 @@
+{
+    "app.taskbar.pre": [
+        {
+            "interface": "shiza\\ApplicationListener",
+            "method": "prepareTaskbar"
+        }
+    ]
+}

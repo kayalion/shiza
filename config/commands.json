@@ -1,0 +1,24 @@
+{
+    "commands": [
+        {
+            "name": "repository update queue",
+            "class": "shiza\\command\\RepositoryQueueUpdateCommand"
+        },
+        {
+            "name": "server backup queue",
+            "class": "shiza\\command\\ServerQueueBackupCommand"
+        },
+        {
+            "name": "server backup rotate",
+            "class": "shiza\\command\\ServerRotateBackupCommand"
+        },
+        {
+            "name": "server calculate disk usage",
+            "class": "shiza\\command\\ServerCalculateDiskUsageCommand"
+        },
+        {
+            "name": "server renw certificates",
+            "class": "shiza\\command\\ServerRenewCertificatesCommand"
+        }
+    ]
+}

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<models>
+    <model name="Message" entryClass="shiza\orm\entry\MessageEntry">
+        <field name="repository" model="Repository" relation="belongsTo"/>
+        <field name="project" model="Project" relation="belongsTo"/>
+        <field name="type" type="string"/>
+        <field name="title" type="string"/>
+        <field name="description" type="text">
+            <validation name="required"/>
+        </field>
+        <field name="body" type="text"/>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.version" value="true"/>
+        <option name="order.direction" value="DESC"/>
+        <option name="order.field" value="dateAdded"/>
+    </model>
+    <model name="SshKey" modelClass="shiza\orm\model\SshKeyModel" entryClass="shiza\orm\entry\SshKeyEntry">
+        <field name="publicKey" type="text">
+            <validator name="required"/>
+        </field>
+        <field name="name" type="string"/>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.version" value="true"/>
+        <option name="order.direction" value="ASC"/>
+        <option name="order.field" value="name"/>
+    </model>
+    <model name="KeyChain" modelClass="shiza\orm\model\KeyChainModel">
+        <field name="name" type="string" unique="true">
+            <validator name="required"/>
+        </field>
+        <field name="sshKeys" model="SshKey" relation="hasMany" linkModel="KeyChainSshKey"/>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.version" value="true"/>
+        <option name="order.direction" value="ASC"/>
+        <option name="order.field" value="name"/>
+    </model>
+    <model name="Server" modelClass="shiza\orm\model\ServerModel" entryClass="shiza\orm\entry\ServerEntry" willBlockDeleteWhenUsed="true">
+        <field name="name" type="string">
+            <validator name="required"/>
+        </field>
+        <field name="host" type="string">
+            <validator name="required"/>
+        </field>
+        <field name="port" type="integer" default="22"/>
+        <field name="ipAddress" type="string"/>
+        <field name="username" type="string" default="root"/>
+        <field name="authManager" type="string"/>
+        <field name="fingerprint" type="text"/>
+        <field name="fingerprintError" type="text"/>
+        <field name="isWeb" type="boolean"/>
+        <field name="webManager" type="string"/>
+        <field name="phpVersions" type="serialize"/>
+        <field name="isVarnish" type="boolean"/>
+        <field name="varnishManager" type="string"/>
+        <field name="varnishPort" type="integer" default="6081"/>
+        <field name="varnishAdminPort" type="integer" default="6082"/>
+        <field name="varnishSecret" type="string"/>
+        <field name="varnishMemory" type="integer"/>
+        <field name="isDatabase" type="boolean"/>
+        <field name="databaseUsername" type="string"/>
+        <field name="databasePassword" type="string"/>
+        <field name="databaseManager" type="string"/>
+        <field name="isCron" type="boolean"/>
+        <field name="cronManager" type="string"/>
+
+        <format name="title">{name}</format>
+        <format name="teaser">{host}</format>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.slug" value="name"/>
+        <option name="behaviour.version" value="true"/>
+        <option name="order.direction" value="ASC"/>
+        <option name="order.field" value="host"/>
+    </model>
+    <model name="Repository" modelClass="shiza\orm\model\RepositoryModel" entryClass="shiza\orm\entry\RepositoryEntry">
+        <field name="vcsManager" type="string">
+            <validation name="required" />
+        </field>
+        <field name="name" type="string">
+            <validation name="required" />
+        </field>
+        <field name="url" type="string">
+            <validation name="required" />
+        </field>
+        <field name="status" type="string" default="new" />
+        <field name="builders" model="RepositoryBuilder" relation="hasMany" dependant="true" />
+        <field name="deployers" model="RepositoryDeployer" relation="hasMany" dependant="true" />
+
+        <format name="title">{name}</format>
+        <format name="teaser">{repository}</format>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.slug" value="name"/>
+        <option name="behaviour.version" value="true"/>
+        <option name="order.direction" value="ASC"/>
+        <option name="order.field" value="name"/>
+    </model>
+    <model name="RepositoryBuilder" modelClass="shiza\orm\model\RepositoryBuilderModel" entryClass="shiza\orm\entry\RepositoryBuilderEntry">
+        <field name="buildManager" type="string">
+            <validation name="required" />
+        </field>
+        <field name="repository" model="Repository" relation="belongsTo">
+            <validation name="required" />
+        </field>
+        <field name="branch" type="string">
+            <validation name="required" />
+        </field>
+        <field name="willCheckout" type="boolean" default="1" />
+        <field name="name" type="string">
+            <validation name="required" />
+        </field>
+        <field name="script" type="text">
+            <validation name="required" />
+        </field>
+        <field name="isAutomatic" type="boolean"/>
+        <field name="revision" type="string" />
+        <field name="status" type="string" default="new" />
+        <field name="dateBuilded" type="datetime" />
+        <field name="queueJobStatus" model="QueueJobStatus" relation="belongsTo"/>
+
+        <format name="title">{name}</format>
+        <format name="teaser">{repository.name} {repository.url}</format>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.slug" value="name"/>
+        <option name="behaviour.version" value="true"/>
+    </model>
+    <model name="RepositoryDeployer" modelClass="shiza\orm\model\RepositoryDeployerModel" entryClass="shiza\orm\entry\RepositoryDeployerEntry">
+        <field name="deployManager" type="string">
+            <validation name="required" />
+        </field>
+        <field name="repository" model="Repository" relation="belongsTo">
+            <validator name="required" />
+        </field>
+        <field name="branch" type="string">
+            <validator name="required" />
+        </field>
+        <field name="name" type="string">
+            <validator name="required" />
+        </field>
+        <field name="repositoryPath" type="string" default="/" />
+        <field name="remoteHost" type="string">
+            <validator name="required" />
+        </field>
+        <field name="remotePort" type="string">
+            <validator name="numeric" />
+        </field>
+        <field name="remotePath" type="string" />
+        <field name="remoteUsername" type="string">
+            <validator name="required" />
+        </field>
+        <field name="remotePassword" type="string" />
+        <field name="useKey" type="boolean" default="1" />
+        <field name="usePassive" type="boolean" />
+        <field name="useSsl" type="boolean" />
+        <field name="exclude" type="text" />
+        <field name="script" type="text" />
+        <field name="isAutomatic" type="boolean"/>
+        <field name="fingerprint" type="string" />
+        <field name="revision" type="string" />
+        <field name="status" type="string" default="new" />
+        <field name="dateDeployed" type="datetime" />
+        <field name="queueJobStatus" model="QueueJobStatus" relation="belongsTo"/>
+
+        <format name="title">{name}</format>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.slug" value="name"/>
+        <option name="behaviour.version" value="true"/>
+    </model>
+    <model name="RepositoryRecent" modelClass="shiza\orm\model\RepositoryRecentModel">
+        <field name="repository" model="Repository" relation="belongsTo">
+            <validation name="required"/>
+        </field>
+        <field name="user" type="string">
+            <validator name="required"/>
+        </field>
+
+        <option name="behaviour.date" value="true"/>
+    </model>
+    <model name="Project" modelClass="shiza\orm\model\ProjectModel" entryClass="shiza\orm\entry\ProjectEntry">
+        <field name="code" type="string" unique="true">
+            <validator name="required"/>
+            <validator name="size">
+                <parameter name="maximum" value="3"/>
+                <parameter name="maximum" value="16"/>
+            </validator>
+            <validator name="regex">
+                <parameter name="required" value="0"/>
+                <parameter name="regex" value="/^[a-zA-Z0-9]+$/"/>
+                <parameter name="error.regex" value="error.validation.project.code"/>
+            </validator>
+        </field>
+        <field name="name" type="string"/>
+        <field name="notes" type="text"/>
+        <field name="password" type="string"/>
+        <field name="keyChains" model="KeyChain" relation="hasMany" linkModel="ProjectKeyChain"/>
+        <field name="sshKeys" model="SshKey" relation="hasMany" linkModel="ProjectSshKey"/>
+        <field name="credentialsQueueJobStatus" model="QueueJobStatus" relation="belongsTo" dependant="true"/>
+        <field name="environments" model="ProjectEnvironment" relation="hasMany" dependant="true"/>
+        <field name="databases" model="ProjectDatabase" relation="hasMany" dependant="true"/>
+        <field name="cronServer" model="Server" relation="belongsTo"/>
+        <field name="cronQueueJobStatus" model="QueueJobStatus" relation="belongsTo" dependant="true"/>
+        <field name="cronTab" type="text">
+            <validator name="cron"/>
+        </field>
+        <field name="varnishServer" model="Server" relation="belongsTo"/>
+        <field name="varnishQueueJobStatus" model="QueueJobStatus" relation="belongsTo" dependant="true"/>
+        <field name="varnishSecret" type="string"/>
+        <field name="varnishMemory" type="integer"/>
+        <field name="varnishPort" type="integer"/>
+        <field name="varnishAdminPort" type="integer"/>
+        <field name="varnishVcl" type="text">
+        </field>
+        <field name="isDeleted" type="boolean"/>
+
+        <index name="codeName">
+            <indexField name="code"/>
+            <indexField name="name"/>
+        </index>
+
+        <format name="title">{code}</format>
+        <format name="teaser">{name}</format>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.version" value="true"/>
+        <option name="order.direction" value="ASC"/>
+        <option name="order.field" value="name"/>
+    </model>
+    <model name="ProjectEnvironment" modelClass="shiza\orm\model\ProjectEnvironmentModel" entryClass="shiza\orm\entry\ProjectEnvironmentEntry">
+        <field name="project" model="Project" relation="belongsTo">
+            <validation name="required"/>
+        </field>
+        <field name="server" model="Server" relation="belongsTo">
+            <validator name="required"/>
+        </field>
+        <field name="domain" type="string" unique="true">
+            <validator name="required"/>
+            <validator name="regex">
+                <parameter name="required" value="0"/>
+                <parameter name="regex" value="/^[\p{Latin}\d]+([\-\.]{1}[\p{Latin}\d]+)*\.[a-z]{2,5}$/u"/>
+                <parameter name="error.regex" value="error.validation.domain"/>
+            </validator>
+        </field>
+        <field name="alias" type="text">
+            <validator name="regex">
+                <parameter name="required" value="0"/>
+                <parameter name="regex" value="/^(((\\*\\.)?[\p{Latin}\d]+([\-\.]{1}[\p{Latin}\d]+)*\.[a-z]{2,5}((\r)?\n)?)*)?$/u"/>
+                <parameter name="error.regex" value="error.validation.domain"/>
+            </validator>
+        </field>
+        <field name="isActive" type="boolean" default="1"/>
+        <field name="phpVersion" type="string"/>
+        <field name="phpIni" type="text">
+            <validator name="ini"/>
+        </field>
+        <field name="sslManager" type="string"/>
+        <field name="sslCountry" type="string"/>
+        <field name="sslState" type="string"/>
+        <field name="sslLocality" type="string"/>
+        <field name="sslOrganisation" type="string"/>
+        <field name="sslCommonName" type="string"/>
+        <field name="sslEmail" type="email"/>
+        <field name="sslCertificate" type="text"/>
+        <field name="sslCertificateKey" type="text"/>
+        <field name="sslCertificateExpires" type="datetime"/>
+        <field name="isSslActive" type="boolean"/>
+        <field name="diskUsage" type="integer" default="0"/>
+        <field name="queueJobStatus" model="QueueJobStatus" relation="belongsTo"/>
+        <field name="isDeleted" type="boolean"/>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.version" value="true"/>
+        <option name="order.field" value="domain"/>
+    </model>
+    <model name="ProjectDatabase" modelClass="shiza\orm\model\ProjectDatabaseModel" entryClass="shiza\orm\entry\ProjectDatabaseEntry">
+        <field name="project" model="Project" relation="belongsTo">
+            <validation name="required"/>
+        </field>
+        <field name="server" model="Server" relation="belongsTo">
+            <validator name="required"/>
+        </field>
+        <field name="name" type="string">
+            <validator name="required"/>
+            <validator name="regex">
+                <parameter name="required" value="0"/>
+                <parameter name="regex" value="/^[a-z0-9_]+$/"/>
+            </validator>
+        </field>
+        <field name="diskUsage" type="integer" default="0"/>
+        <field name="queueJobStatus" model="QueueJobStatus" relation="belongsTo"/>
+        <field name="isDeleted" type="boolean"/>
+
+        <option name="behaviour.date" value="true"/>
+        <option name="behaviour.log" value="true"/>
+        <option name="behaviour.version" value="true"/>
+    </model>
+    <model name="ProjectRecent" modelClass="shiza\orm\model\ProjectRecentModel">
+        <field name="project" model="Project" relation="belongsTo">
+            <validation name="required"/>
+        </field>
+        <field name="user" type="string">
+            <validator name="required"/>
+        </field>
+
+        <option name="behaviour.date" value="true"/>
+    </model>
+</models>

@@ -1,0 +1,57 @@
+td.hour {
+    width: 100px;
+}
+
+#cron-occupation {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+#cron-occupation div.hour {
+    border-bottom: 1px solid #DDD;
+    float: left;
+    width: 4.1%;
+}
+
+#cron-occupation div.hour:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+#cron-occupation div.hour {
+    text-align: center;
+}
+
+#cron-occupation .hour-label {
+    margin: 3px 0;
+}
+
+#cron-occupation div.minute {
+    float: left;
+}
+
+#cron-occupation div.minute .graph {
+    height: 20px;
+}
+
+#cron-occupation div.minute .graph .bar {
+    background: #bbbbbb; /* Old browsers */
+    background: -moz-linear-gradient(top,  #bbbbbb 0%, #777777 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bbbbbb), color-stop(100%,#777777)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #bbbbbb 0%,#777777 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #bbbbbb 0%,#777777 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #bbbbbb 0%,#777777 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #bbbbbb 0%,#777777 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bbbbbb', endColorstr='#777777',GradientType=0 ); /* IE6-9 */
+    height: 100%;
+}
+
+#cron-occupation div.minute:nth-child(odd) .graph .bar {
+    background: #cccccc; /* Old browsers */
+    background: -moz-linear-gradient(top,  #cccccc 0%, #888888 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cccccc), color-stop(100%,#888888)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #cccccc 0%,#888888 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #cccccc 0%,#888888 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #cccccc 0%,#888888 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #cccccc 0%,#888888 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#888888',GradientType=0 ); /* IE6-9 */
+}

@@ -1,0 +1,242 @@
+{
+    "dependencies": [
+        {
+            "interfaces": "shiza\\manager\\auth\\AuthManager",
+            "class": "shiza\\manager\\auth\\NullAuthManager",
+            "id": "null"
+        },
+        {
+            "interfaces": "shiza\\manager\\auth\\AuthManager",
+            "class": "shiza\\manager\\auth\\SshAuthManager",
+            "id": "ssh"
+        },
+        {
+            "interfaces": "shiza\\manager\\build\\BuildManager",
+            "class": "shiza\\manager\\build\\LocalBuildManager",
+            "id": "local"
+        },
+        {
+            "interfaces": "shiza\\manager\\cron\\CronManager",
+            "class": "shiza\\manager\\cron\\SshCronManager",
+            "id": "ssh"
+        },
+        {
+            "interfaces": "shiza\\manager\\database\\DatabaseManager",
+            "class": "shiza\\manager\\database\\DriverMysqlDatabaseManager",
+            "id": "mysql.driver"
+        },
+        {
+            "interfaces": "shiza\\manager\\deploy\\DeployManager",
+            "class": "shiza\\manager\\deploy\\SftpDeployManager",
+            "id": "sftp"
+        },
+        {
+            "interfaces": "shiza\\manager\\deploy\\DeployManager",
+            "class": "shiza\\manager\\deploy\\SshDeployManager",
+            "id": "ssh"
+        },
+        {
+            "interfaces": "shiza\\manager\\web\\WebManager",
+            "class": "shiza\\manager\\web\\ApacheSshWebManager",
+            "id": "apache.ssh"
+        },
+        {
+            "interfaces": "shiza\\manager\\varnish\\VarnishManager",
+            "class": "shiza\\manager\\varnish\\SshVarnishManager",
+            "id": "ssh"
+        },
+        {
+            "interfaces": "shiza\\manager\\ssl\\SslManager",
+            "class": "shiza\\manager\\ssl\\SelfSignedSslManager",
+            "id": "self"
+        },
+        {
+            "interfaces": "shiza\\manager\\ssl\\SslManager",
+            "class": "shiza\\manager\\ssl\\LetsEncryptSslManager",
+            "id": "le"
+        },
+        {
+            "interfaces": "shiza\\manager\\ssl\\SslManager",
+            "class": "shiza\\manager\\ssl\\ManualSslManager",
+            "id": "manual"
+        },
+        {
+            "interfaces": "shiza\\manager\\vcs\\VcsManager",
+            "class": "shiza\\manager\\vcs\\GitVcsManager",
+            "id": "git"
+        },
+        {
+            "interfaces": "ride\\library\\queue\\dispatcher\\QueueDispatcher",
+            "class": "ride\\library\\queue\\dispatcher\\SingleQueueDispatcher",
+            "id": "single",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "queue",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "system.queue",
+                                "default": "q1"
+                            }
+                        }
+                    ]
+                },
+                "setQueueManager"
+            ]
+        },
+        {
+            "interfaces": "ride\\library\\validation\\validator\\Validator",
+            "class": "shiza\\validator\\CronValidator",
+            "id": "cron",
+            "calls": [
+                "setCronHelper"
+            ]
+        },
+        {
+            "interfaces": "ride\\library\\validation\\validator\\Validator",
+            "class": "shiza\\validator\\IniValidator",
+            "id": "ini",
+            "calls": [
+                "setIniParser"
+            ]
+        },
+        {
+            "class": "ride\\web\\base\\menu\\MenuItem",
+            "id": "ssh-keys",
+            "calls": [
+                {
+                    "method": "setTranslation",
+                    "arguments": [
+                        {
+                            "name": "key",
+                            "type": "scalar",
+                            "properties": {
+                                "value": "title.ssh-keys"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "setRoute",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "scalar",
+                            "properties": {
+                                "value": "ssh-keys"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "class": "ride\\web\\base\\menu\\MenuItem",
+            "id": "servers",
+            "calls": [
+                {
+                    "method": "setTranslation",
+                    "arguments": [
+                        {
+                            "name": "key",
+                            "type": "scalar",
+                            "properties": {
+                                "value": "title.servers"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "setRoute",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "scalar",
+                            "properties": {
+                                "value": "servers"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "class": "ride\\web\\base\\menu\\MenuItem",
+            "id": "activity",
+            "calls": [
+                {
+                    "method": "setTranslation",
+                    "arguments": [
+                        {
+                            "name": "key",
+                            "type": "scalar",
+                            "properties": {
+                                "value": "title.activity"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "setRoute",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "scalar",
+                            "properties": {
+                                "value": "messages"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "class": "ride\\web\\base\\menu\\Menu",
+            "extends": "applications",
+            "id": "applications",
+            "calls": [
+                {
+                    "method": "addMenuItem",
+                    "arguments": [
+                        {
+                            "name": "menuItem",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "ride\\web\\base\\menu\\MenuItem",
+                                "id": "activity"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "addMenuItem",
+                    "arguments": [
+                        {
+                            "name": "menuItem",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "ride\\web\\base\\menu\\MenuItem",
+                                "id": "ssh-keys"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "addMenuItem",
+                    "arguments": [
+                        {
+                            "name": "menuItem",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "ride\\web\\base\\menu\\MenuItem",
+                                "id": "servers"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
