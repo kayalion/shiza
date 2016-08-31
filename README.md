@@ -1,6 +1,7 @@
 # Shiza
 
-Shiza is a server management tool for a web office still heavy under development.
+Shiza is a server management tool for a web office.
+It's still under development.
 
 You can use it to:
 - manage web environments and databases for your projects
@@ -114,13 +115,13 @@ $parameters = array(
     ),
 ```
 
-Run the following command to optimize the autoloader from Composer:
+Save and exit the editor, then run the following command to optimize the autoloader from Composer:
 
 ```
 composer dump-autoload --optimize
 ```
 
-Next we enable and warm up the caches:
+Next, we enable and warm up the caches:
 
 ```
 php application/cli.php cache enable
@@ -135,7 +136,7 @@ php application/cli.php assets deploy
 
 ### Setup queue worker
 
-This application uses a queue to handle the tasks.
+Shiza uses a queue to handle the tasks.
 It's a server process which will do all the heavy lifting, and we need to set it up off course.
 
 Copy the _worker.sh_ script from the _ride/cli-queue_ module:
@@ -147,7 +148,9 @@ cp vendor/ride/cli-queue/src/worker.sh application
 Edit it and set the _$DIRECTORY_ variable to your main directory of your installation.
 While your at it, you can tune the sleep time to your needs.
 
-To make sure it's always running, you can create a Cron entry for it:
+By now, You have seen there is a log file of your queue process in _application/data/log/worker.log_.
+
+To make sure the queue worker is always running, you can create a Cron entry for it:
 
 ```
 @reboot /real/path/to/production/application/worker.sh
@@ -158,6 +161,15 @@ To edit your crontab, run the following command:
 ```
 crontab -e
 ```
+
+This will start your worker when your server reboots.
+For now, you can start it by running:
+
+```
+/real/path/to/production/application/worker.sh &
+```
+
+With an ampersand to throw it to the background.
 
 ### Setup Cron jobs
 
