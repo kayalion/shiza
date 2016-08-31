@@ -11,6 +11,8 @@
     ],
     "require": {
         "ride/cli" : "*",
+        "ride/cli-orm": "*",
+        "ride/cli-queue": "^0.1.1",
         "ride/lib-common" : "*",
         "ride/lib-database" : "*",
         "ride/lib-form" : "*",
@@ -22,6 +24,7 @@
         "ride/lib-system" : "^1.1.0",
         "ride/lib-system-ssh" : "*",
         "ride/lib-validation" : "*",
+        "ride/lib-varnish": "*",
         "ride/web-base" : "*",
         "ride/wra-queue" : "*"
     },

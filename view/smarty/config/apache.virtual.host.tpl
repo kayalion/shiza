@@ -30,6 +30,9 @@
 
     <IfModule mod_fcgid.c>
         SuexecUserGroup {$username} {$username}
+        FcgidMinProcessesPerClass 0
+        FcgidMaxProcessesPerClass 5
+
         <Directory {$publicDirectory}>
             Options -Includes +MultiViews +ExecCGI -Indexes +FollowSymLinks
             AllowOverride All
@@ -80,6 +83,8 @@
 
         <IfModule mod_fcgid.c>
             SuexecUserGroup {$username} {$username}
+            FcgidMinProcessesPerClass 0
+            FcgidMaxProcessesPerClass 5
             <Directory {$publicDirectory}>
                 Options -Includes +MultiViews +ExecCGI -Indexes +FollowSymLinks
                 AllowOverride All

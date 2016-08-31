@@ -16,6 +16,6 @@
 
 export PHPRC={$configDirectory}
 export PHP_FCGI_MAX_REQUESTS=500
-export PHP_FCGI_CHILDREN=8
+export PHP_FCGI_CHILDREN=1
 
 exec {$phpBinary} $@

@@ -45,9 +45,9 @@ class CronValidator extends AbstractValidator {
     }
 
     /**
-     * Checks whether a value is empty
+     * Checks whether a value is a valid crontab
      * @param mixed $value
-     * @return boolean True if the value is empty, false otherwise
+     * @return boolean True if the value is valid, false otherwise
      */
     public function isValid($value) {
         $this->resetErrors();

@@ -19,26 +19,26 @@ class IniValidator extends AbstractValidator {
     const NAME = 'ini';
 
     /**
-     * Code of the error message when the value is not a valid crontab
+     * Code of the error message when the value is not a valid ini
      * @var string
      */
     const CODE = 'error.validation.ini';
 
     /**
-     * Message of the error message when the value is not valid crontab
+     * Message of the error message when the value is not valid ini
      * @var string
      */
     const MESSAGE = 'Invalid INI syntax';
 
     /**
-     * Instance of the cron helper
-     * @var \shiza\helper\CronHelper
+     * Instance of the ini parser
+     * @var \ride\library\config\parser\IniParser
      */
     private $iniParser;
 
     /**
-     * Sets the cron helper to this validator
-     * @param \shiza\helper\CronHelper $cronHelper
+     * Sets the ini parser to this validator
+     * @param \ride\library\config\parser\IniParser $iniParser
      * @return null
      */
     public function setIniParser(IniParser $iniParser) {
@@ -46,9 +46,9 @@ class IniValidator extends AbstractValidator {
     }
 
     /**
-     * Checks whether a value is empty
+     * Checks whether a value is valid ini
      * @param mixed $value
-     * @return boolean True if the value is empty, false otherwise
+     * @return boolean True if the value is valid, false otherwise
      */
     public function isValid($value) {
         $this->resetErrors();

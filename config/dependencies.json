@@ -66,27 +66,6 @@
             "id": "git"
         },
         {
-            "interfaces": "ride\\library\\queue\\dispatcher\\QueueDispatcher",
-            "class": "ride\\library\\queue\\dispatcher\\SingleQueueDispatcher",
-            "id": "single",
-            "calls": [
-                {
-                    "method": "__construct",
-                    "arguments": [
-                        {
-                            "name": "queue",
-                            "type": "parameter",
-                            "properties": {
-                                "key": "system.queue",
-                                "default": "q1"
-                            }
-                        }
-                    ]
-                },
-                "setQueueManager"
-            ]
-        },
-        {
             "interfaces": "ride\\library\\validation\\validator\\Validator",
             "class": "shiza\\validator\\CronValidator",
             "id": "cron",
