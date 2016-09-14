@@ -188,6 +188,20 @@ For the full feature set of this application, you need to setup a couple of Cron
 0 3 * * * php /real/path/to/production/application/cli.php session clear
 ```
 
+### Setup Web Skeleton
+
+By default, a _index.php_ and a _robots.txt_ file are written to a newly created web environment. 
+You can set your own source directory which can act as a skeleton for a new web environment.
+
+Run the following commands to create and set the skeleton directory to your application directory:
+
+```
+php application/cli.php parameter set system.directory.skeleton %application%/data/skeleton
+mkdir -p application/data/skeleton
+```
+
+All files you create in this directory are now copied to a newly created web environment.
+
 ## Appendix: Installation Web server Debian 8
 
 The following commands will setup a basic web server with multiple versions of PHP.

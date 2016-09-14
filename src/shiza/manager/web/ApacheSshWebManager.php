@@ -20,11 +20,15 @@ class ApacheSshWebManager implements WebManager {
 
     const TEMPLATE_PHP_WRAPPER = 'config/apache.php.wrapper';
 
-    public function __construct(ServerService $serverService, TemplateFacade $templateFacade) {
+    public function __construct(ServerService $serverService, TemplateFacade $templateFacade, File $skeletonDirectory) {
         $this->serverService = $serverService;
         $this->templateFacade = $templateFacade;
+        $this->skeletonDirectory = $skeletonDirectory;
+
         $this->phpFarmDirectory = '/opt/phpfarm';
-        $this->logScript = '/home/kayalion/Projects/Shiza/web-admin/src/logresolvemerge.pl';
+
+        $this->logScript = __DIR__ . '/../../../logresolvemerge.pl';
+
         $this->backupHourlyMax = 6;
         $this->backupHourlyPrefix = 'hourly-';
         $this->backupDailyMax = 14;
@@ -416,16 +420,26 @@ class ApacheSshWebManager implements WebManager {
         // create default files if public is empty
         $files = $publicDirectory->read();
         if (!$files) {
-            $indexFile = $publicDirectory->getChild('index.php');
-            $indexFile->write("<?php\n\nphpinfo();\n");
-
-            $system->execute('chown ' . $username . ':' . $username . ' ' . $indexFile->getLocalPath());
-
-            $robotsFile = $publicDirectory->getChild('robots.txt');
-            $robotsFile->write("User-agent: *\nDisallow: /");;
-
-            $system->execute('chown ' . $username . ':' . $username . ' ' . $robotsFile->getLocalPath());
+            $this->writeDefaultFiles($system, $publicDirectory, $username);
         }
+    }
+
+    private function writeDefaultFiles(SshSystem $system, File $publicDirectory, $username) {
+        if (!$this->skeletonDirectory->exists() || !$this->skeletonDirectory->isDirectory()) {
+            return;
+        }
+
+        $skeletonPath = $this->skeletonDirectory->getAbsolutePath();
+
+        $files = $this->skeletonDirectory->read(true);
+        foreach ($files as $localFile) {
+            $path = str_replace($skeletonPath . '/', '', $localFile->getAbsolutePath());
+
+            $remoteFile = $publicDirectory->getChild($path);
+            $localFile->copy($remoteFile);
+        }
+
+        $system->execute('chown -R ' . $username . ':' . $username . ' ' . $publicDirectory->getLocalPath());
     }
 
     private function createLogDirectory(SshSystem $system, File $homeDirectory, ProjectEnvironmentEntry $environment) {

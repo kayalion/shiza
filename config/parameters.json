@@ -1,3 +1,4 @@
 {
-    "system.directory.repository": "%application%/data/repositories"
+    "system.directory.repository": "%application%/data/repositories",
+    "system.directory.skeleton": "%path%/data/skeleton"
 }

@@ -1,6 +1,24 @@
 {
     "dependencies": [
         {
+            "class": "ride\\library\\system\\file\\File",
+            "id": "web.skeleton",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "path",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "system.directory.skeleton"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "interfaces": "shiza\\manager\\auth\\AuthManager",
             "class": "shiza\\manager\\auth\\NullAuthManager",
             "id": "null"
@@ -38,7 +56,22 @@
         {
             "interfaces": "shiza\\manager\\web\\WebManager",
             "class": "shiza\\manager\\web\\ApacheSshWebManager",
-            "id": "apache.ssh"
+            "id": "apache.ssh",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "skeletonDirectory",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "ride\\library\\system\\file\\File",
+                                "id": "web.skeleton"
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         {
             "interfaces": "shiza\\manager\\varnish\\VarnishManager",
