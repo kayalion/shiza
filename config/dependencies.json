@@ -26,7 +26,22 @@
         {
             "interfaces": "shiza\\manager\\auth\\AuthManager",
             "class": "shiza\\manager\\auth\\SshAuthManager",
-            "id": "ssh"
+            "id": "ssh",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "homeDirectory",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "auth.ssh.home",
+                                "default": "/home"
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         {
             "interfaces": "shiza\\manager\\build\\BuildManager",

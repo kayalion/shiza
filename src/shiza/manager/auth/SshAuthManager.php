@@ -13,9 +13,10 @@ use \Exception;
 
 class SshAuthManager implements AuthManager {
 
-    public function __construct(ServerService $serverService, $offset = 10000) {
+    public function __construct(ServerService $serverService, $offset = 10000, $homeDirectory = '/home') {
         $this->serverService = $serverService;
         $this->offset = $offset;
+        $this->homeDirectory = $homeDirectory;
     }
 
     public function hasUser(ServerEntry $server, ProjectEntry $project) {
@@ -126,7 +127,7 @@ class SshAuthManager implements AuthManager {
     }
 
     public function getHomeDirectory($username) {
-        return '/home/' . substr($username, 0, 1) . '/' . $username;
+        return $this->homeDirectory . '/' . substr($username, 0, 1) . '/' . $username;
     }
 
     private function updateAuthorizedKeys(array $lines, $sshKeys) {
