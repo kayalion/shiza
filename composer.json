@@ -22,7 +22,7 @@
         "ride/lib-queue" : "^1.0.0",
         "ride/lib-orm" : "^1.0.0",
         "ride/lib-system" : "^1.1.0",
-        "ride/lib-system-ssh" : "^1.0.0",
+        "ride/lib-system-ssh" : "^0.1.0",
         "ride/lib-validation" : "^1.0.0",
         "ride/lib-varnish": "^1.0.0",
         "ride/web-base" : "^1.0.0",
