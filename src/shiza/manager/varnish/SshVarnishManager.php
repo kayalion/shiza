@@ -353,7 +353,7 @@ class SshVarnishManager implements VarnishManager {
 
         $varnishAdmin = $this->createVarnishAdmin($system, $project);
         $varnishAdmin->connect();
-        $varnishAdmin->loadVclFromFile($vclFile->getLocalPath());
+        $varnishAdmin->loadAndUseVclFromFile($vclFile->getLocalPath());
         $varnishAdmin->disconnect();
     }
 
