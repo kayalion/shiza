@@ -2,7 +2,9 @@
 
 namespace shiza\manager\ssl;
 
+use ride\library\system\file\File;
 use ride\library\system\System;
+use ride\library\system\SshSystem;
 
 use shiza\orm\entry\ProjectEnvironmentEntry;
 
@@ -46,7 +48,7 @@ class LetsEncryptSslManager implements SslManager {
         }
 
         // generate a new certificate
-        $webManager = $this->serverService->getAuthManager($environment->getServer()->getWebManager());
+        $webManager = $this->serverService->getWebManager($environment->getServer()->getWebManager());
         $webRoot = $webManager->getWebRoot($environment);
 
         $command = $this->certbot . ' certonly';
@@ -74,7 +76,7 @@ class LetsEncryptSslManager implements SslManager {
         return true;
     }
 
-    private function getExpirationDate(System $system, File $certificateFile) {
+    private function getExpirationDate(SshSystem $system, File $certificateFile) {
         if (!$certificateFile->exists()) {
             return false;
         }

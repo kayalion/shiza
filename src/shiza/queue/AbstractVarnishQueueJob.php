@@ -82,9 +82,9 @@ abstract class AbstractVarnishQueueJob extends AbstractQueueJob {
         try {
             $this->performTask($project, $manager);
 
-            $this->serverService->getSshSystem($server)->disconnect();
+            $this->serverService->getSshSystemForServer($server)->disconnect();
         } catch (Exception $exception) {
-            $this->serverService->getSshSystem($server)->disconnect();
+            $this->serverService->getSshSystemForServer($server)->disconnect();
 
             throw $exception;
         }
