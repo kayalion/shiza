@@ -389,7 +389,7 @@ class SshVarnishManager implements VarnishManager {
 
         $secretFile = $this->getSecretFile($system, $project);
         if (!$secretFile->exists()) {
-            $secretFile->write($secret . "\n");
+            $secretFile->write($secret);
             $secretFile->setPermissions(0600);
         }
 
