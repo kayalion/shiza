@@ -17,7 +17,7 @@
             "class": "shiza\\command\\ServerCalculateDiskUsageCommand"
         },
         {
-            "name": "server renw certificates",
+            "name": "server renew certificates",
             "class": "shiza\\command\\ServerRenewCertificatesCommand"
         }
     ]
