@@ -18,7 +18,9 @@ class LetsEncryptSslManager implements SslManager {
         $this->serverService = $serverService;
         $this->certbot = '/opt/certbot/certbot-auto';
         $this->renewalDays = 3;
-        $this->isDebug = true;
+        // $this->isDebug = true;
+        // Add environment variable?
+        $this->isDebug = false;
     }
 
     public function generateCertificate(ProjectEnvironmentEntry $environment) {
