@@ -18,7 +18,9 @@ class LetsEncryptSslManager implements SslManager {
         $this->serverService = $serverService;
         $this->certbot = '/opt/certbot/certbot-auto';
         $this->renewalDays = 3;
-        $this->isDebug = true;
+        // $this->isDebug = true;
+        // Add environment variable?
+        $this->isDebug = false;
     }
 
     public function generateCertificate(ProjectEnvironmentEntry $environment) {
@@ -54,7 +56,7 @@ class LetsEncryptSslManager implements SslManager {
         $command = $this->certbot . ' certonly';
         $command .= ' --non-interactive';
         $command .= ' --text';
-        $command .= ' --agrees-tos';
+        $command .= ' --agree-tos';
         $command .= ' --webroot -w ' . $webRoot;
         $command .= ' --domain ' . $domain;
         $command .= ' --email ' . $email;
@@ -70,7 +72,7 @@ class LetsEncryptSslManager implements SslManager {
         }
 
         $environment->setSslCertificate($certificateFile->read());
-        $environment->setSslCertificateKey($keyFile->read());
+        $environment->setSslCertificateKey($certificateKeyFile->read());
         $environment->setSslCertificateExpires($this->getExpirationDate($system, $certificateFile));
 
         return true;
